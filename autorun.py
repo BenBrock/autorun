@@ -6,6 +6,11 @@ import ast
 import sys
 import os
 
+def get_config_fname(args):
+    binary_path = os.path.dirname(os.path.realpath(__file__))
+    fname = binary_path + '/conf/'
+    return 'conf.' + args.config
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='autorun, an automatic job \
              generator for HPC queueing systems')
@@ -38,7 +43,8 @@ if __name__ == '__main__':
     if isinstance(args.commands, str):
         args.commands = [args.commands]
 
-    tmplt = __import__(args.config)
+    config_fname = get_config_fname(args)
+    tmplt = __import__(config_fname).__dict__[args.config]
 
     try:
         success = os.makedirs(args.jobname)
