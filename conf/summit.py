@@ -7,7 +7,6 @@ template = '''#!/bin/bash
 #BSUB -nnodes {nnodes}
 # End LSF directives and begin shell commands
 cd $LS_SUBCWD
-
 '''
 
 launcher = 'jsrun -n {nnodes} -c ALL_CPUS -a {npernode} {command}'

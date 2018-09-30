@@ -35,6 +35,9 @@ if __name__ == '__main__':
     parser.add_argument('--runtime', dest='runtime', type=str,
                         help='Job runtime', required=True)
 
+    parser.add_argument('--email', dest='email', type=str,
+                        help='Email address to notify (optional')
+
     args = parser.parse_args()
 
     args.node_range = ast.literal_eval(args.node_range)
@@ -58,6 +61,12 @@ if __name__ == '__main__':
 
         gend_fname = '{jobname}_{nnodes}.batch'.format(**args.__dict__)
         gend_batchfile = tmplt.template.format(**args.__dict__)
+
+        if args.email is not None:
+          gend_batchfile += '#SBATCH --mail-type=ALL\n'
+          gend_batchfile += '#SBATCH --mail-user=%s\n' % (args.email,)
+        gend_batchfile += '\n'
+
         for command in args.commands:
             args.command = command
             launch_command = tmplt.launcher.format(**args.__dict__)

@@ -6,7 +6,6 @@ template = '''#!/bin/bash -l
 #SBATCH -o {jobname}_{nnodes}.o%j
 #SBATCH -p regular
 #SBATCH -C haswell
-
 '''
 
 launcher = 'srun -N {nnodes} -n $(({npernode}*{nnodes})) {command}'
