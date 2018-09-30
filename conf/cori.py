@@ -1,5 +1,4 @@
-template = '''
-#!/bin/bash -l
+template = '''#!/bin/bash -l
 #SBATCH -N {nnodes}
 #SBATCH -A {account}
 #SBATCH -t {runtime}

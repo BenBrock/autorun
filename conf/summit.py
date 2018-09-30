@@ -1,5 +1,4 @@
-template = '''
-#!/bin/bash
+template = '''#!/bin/bash
 # Begin LSF directives
 #BSUB -P {account}
 #BSUB -J {jobname}_{nnodes}
